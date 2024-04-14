@@ -6,16 +6,35 @@ import {
   Vector,
   UnorderedMap
 } from 'near-sdk-js';
+import { ContractPromise, u128 } from 'near-sdk-as';
 
 import { verify } from '../utils/signature';
 
-function getNodeKeysList(): Uint8Array {
-  const set = new LookupSet<string>('');
-  return set.serialize();
-};
+const VERIFIER_CONTRACT_ID = 'verifier-contract';
 
-function getNodeKeyCount(): number {
-  return 0;
+@NearBindgen({})
+class getDataFromVerifierContract {
+  static getNodeKeys(): ContractPromise {
+    const promise = ContractPromise.create(
+      VERIFIER_CONTRACT_ID,
+      'getNodeKeys',
+      new Uint8Array(0),
+      0,
+      u128.Zero
+    );
+    return promise;
+  };
+
+  static getNodeKeysLength(): ContractPromise {
+    const promise = ContractPromise.create(
+      VERIFIER_CONTRACT_ID,
+      'getNodeKeysLength',
+      new Uint8Array(0),
+      0,
+      u128.Zero
+    );
+    return promise;
+  };
 };
 
 @NearBindgen({})
@@ -42,8 +61,9 @@ class ApplicationContract {
       signature: string;
     }]
   ): void {
-    const node_count = getNodeKeyCount();
-    const node_keys_string = getNodeKeysList();
+    const node_count = getDataFromVerifierContract.getNodeKeysLength().returnAsResult();
+    const node_keys_string = getDataFromVerifierContract.getNodeKeys().returnAsResult();
+
     const node_keys = LookupSet.reconstruct<string>(new LookupSet<Uint16Array>(node_keys_string.toString()));
     
     if (verification_key != this.verification_key)

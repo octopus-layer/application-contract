@@ -8,6 +8,7 @@ module.exports = {
 		js: true,
 		ts: 'module'
 	},
+  extends: "near-sdk-as/asconfig.json",
   require: ['ts-node/register', 'near-workspaces'],
   "nodeArguments": [
 		"--import=tsimp"

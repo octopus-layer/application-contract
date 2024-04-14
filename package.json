@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "near-cli": "^1.0.0",
-    "near-sdk-js": "1.0.0"
+    "near-sdk-js": "1.0.0",
+    "near-sdk-as": "3.2.3"
   },
   "devDependencies": {
     "@ava/typescript": "^4.1.0",
