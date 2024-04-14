@@ -1,5 +1,5 @@
 {
-  "name": "hello_near",
+  "name": "application_contract",
   "version": "1.0.0",
   "license": "(MIT AND Apache-2.0)",
   "type": "module",
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "near-cli": "^4.0.8",
+    "near-sdk-as": "^3.2.3",
     "near-sdk-js": "1.0.0",
     "tweetnacl": "^1.0.3",
     "tweetnacl-util": "^0.15.1"
